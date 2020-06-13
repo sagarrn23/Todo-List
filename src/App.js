@@ -73,26 +73,28 @@ class Todo extends Component {
   }
 
   render() {
+    const pastList = this.state.todo.map((data, index) => {
+      return <List 
+          key={uuidv4()} 
+          task={data.name}
+          delete={() => this.deleteTaskHandler(index)}
+          status={data.status}
+          changeStatus={() => this.taskDoneHandler(index)}
+          defaultCheck={data.status}
+        />;
+    });
+
     return (
       <div className={classes.main}>
         <h1 className={classes.title}>My To Do</h1>
         <div className={classes.wrap}>
-          <AddTask 
-            submit={this.addTaskHandler} 
+          <AddTask
+            submit={this.addTaskHandler}
             addTask={(e) => this.onChangeHandler(e)}
-            initValue={this.state.newTask}/>
+            initValue={this.state.newTask}
+          />
 
-          <ul>
-            {this.state.todo.map((data, index) => {
-              return <List 
-                key={uuidv4()} 
-                task={data.name}
-                delete={() => this.deleteTaskHandler(index)}
-                status={data.status}
-                changeStatus={() => this.taskDoneHandler(index)}
-                defaultCheck={data.status}/>;
-            })}
-          </ul>
+          <ul>{this.state.todo ? pastList : null}</ul>
         </div>
       </div>
     );
