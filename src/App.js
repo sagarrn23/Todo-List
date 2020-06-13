@@ -6,37 +6,70 @@ import './global.css';
 import { v4 as uuidv4 } from "uuid";
 
 class Todo extends Component {
-  state = {
-    todo: [
-      {
-        name: "task 1",
-        status: true
-      },
-      {
-        name: "task 2",
-        status: false
-      },
-      {
-        name: "this is task 3",
-        status: false
-      },
-    ],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      todo: JSON.parse(localStorage.getItem('stored_task')),
+      newTask: ''
+    };
+  }
 
+  // this is to delete a task
   deleteTaskHandler = (index) => {
     const data = [...this.state.todo];
     data.splice(index, 1);
-    this.setState({todo: data});
+
+    this.updateLocalStore(data);
   }
 
+  // this is to complete a task
   taskDoneHandler = (index) => {
     const data = [...this.state.todo];
     data[index].status = !data[index].status;
-    this.setState({todo: data});
+    this.updateLocalStore(data);
   }
 
+  // to add new task
   addTaskHandler = () => {
-    
+    if(this.state.newTask) {
+      const data = [...this.state.todo];
+      data.push({
+        name: this.state.newTask,
+        status: false
+      });
+      this.setState({
+        newTask: ''
+      })
+      this.updateLocalStore(data);
+    }
+  }
+
+  // update in DB
+  updateLocalStore = (data) => {
+    let promise = new Promise((resolve) => {
+      this.setState({
+        todo: data
+      });
+      resolve();
+    })
+
+    promise.then(() => {
+      this.storeLocally()
+    });   
+  }
+
+  // store state in db
+  storeLocally = () => {
+    var storeTask = [...this.state.todo];
+    localStorage.setItem('stored_task', JSON.stringify(storeTask));
+  }
+
+  // take user inputed text
+  onChangeHandler = (e) => {
+    const inputTask = e.target.value;
+    this.setState({
+      newTask: inputTask
+    });
   }
 
   render() {
@@ -44,7 +77,11 @@ class Todo extends Component {
       <div className={classes.main}>
         <h1 className={classes.title}>My To Do</h1>
         <div className={classes.wrap}>
-          <AddTask addData={this.addTaskHandler}/>
+          <AddTask 
+            submit={this.addTaskHandler} 
+            addTask={(e) => this.onChangeHandler(e)}
+            initValue={this.state.newTask}/>
+
           <ul>
             {this.state.todo.map((data, index) => {
               return <List 

@@ -5,10 +5,10 @@ const AddTask = (props) => {
     return (
         <div className={classes.addTask}>
             <div className={classes.inputWrap}>
-                <input type="text"/>
+                <input type="text" value={props.initValue} onChange={props.addTask}/>
             </div>
             <div className={classes.buttonWrap}>
-                <button onClick={props.addData}>Add</button>
+                <button onClick={props.submit}>Add</button>
             </div>
         </div>
     )
