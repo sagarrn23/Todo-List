@@ -1,16 +1,28 @@
 .list {
     padding: 20px 0;
-    box-shadow: 0 0 10px 0 #333;
+    box-shadow: 0 0 6px 0 #333;
     list-style: none;
     display: flex;
     align-items: center;
     margin-bottom: 15px;
+    border-radius: 5px;
+    transition-duration: 300ms;
+    background-color: #f7f7f7;
+}
+
+.list:hover {
+    box-shadow: 0 0 15px 0 #333;
 }
 
 .check,
 .trash {
     width: 10%;
     text-align: center;
+    cursor: pointer;
+}
+
+.check input {
+    cursor: pointer;
 }
 
 .myTask {

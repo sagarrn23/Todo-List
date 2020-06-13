@@ -9,6 +9,12 @@
   margin: 20px auto;
 }
 
+@media screen and (max-width: 768px) {
+  .wrap {
+    width: 80%;
+  }
+}
+
 .title {
   text-align: center;
 }
