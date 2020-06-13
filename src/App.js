@@ -9,7 +9,7 @@ class Todo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todo: JSON.parse(localStorage.getItem('stored_task')),
+      todo: JSON.parse(localStorage.getItem('stored_task')) || [],
       newTask: ''
     };
   }
