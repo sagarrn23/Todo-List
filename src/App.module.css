@@ -1,0 +1,14 @@
+.main {
+  background-color: #fff;
+  min-height: 100vh;
+  border: 1px solid #fff;
+}
+
+.wrap {
+  width: 40%;
+  margin: 20px auto;
+}
+
+.title {
+  text-align: center;
+}

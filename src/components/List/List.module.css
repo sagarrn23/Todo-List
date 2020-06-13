@@ -1,0 +1,23 @@
+.list {
+    padding: 20px 0;
+    box-shadow: 0 0 10px 0 #333;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.check,
+.trash {
+    width: 10%;
+    text-align: center;
+}
+
+.myTask {
+    width: 80%;
+    margin: 0;
+}
+
+.taskDone {
+    text-decoration: line-through;
+}
